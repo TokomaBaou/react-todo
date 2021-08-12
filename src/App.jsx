@@ -5,12 +5,9 @@ export const App = () => {
   //入力した値をState化する
   const [todoText, setTodoText] = useState("");
   //未完了のTODOを格納する配列を作る
-  const [incompleteTodos, setIncompleteTodos] = useState([
-    "今日のタスク",
-    "今日のタスク２"
-  ]);
+  const [incompleteTodos, setIncompleteTodos] = useState([]);
   //ステートの変数名とステートを更新するための関数名
-  const [completeTodos, setCompleteTodos] = useState(["今日のタスク３"]);
+  const [completeTodos, setCompleteTodos] = useState([]);
   //onChangeの関数
   const onChangeTodoText = (event) => setTodoText(event.target.value);
   const onClickAdd = () => {
@@ -37,6 +34,15 @@ export const App = () => {
     const newCompleteTodos = [...completeTodos, incompleteTodos[index]];
     setIncompleteTodos(newIncompleteTodos);
     setCompleteTodos(newCompleteTodos);
+  };
+
+  const onClickBack = (index) => {
+    const newCompleteTodos = [...completeTodos];
+    newCompleteTodos.splice(index, 1);
+
+    const newIncompleteTodos = [...incompleteTodos, completeTodos[index]];
+    setCompleteTodos(newCompleteTodos);
+    setIncompleteTodos(newIncompleteTodos);
   };
 
   return (
@@ -66,11 +72,11 @@ export const App = () => {
       <div className="complete-area">
         <p className="title">完了のTODO</p>
         <ul>
-          {completeTodos.map((todo) => {
+          {completeTodos.map((todo, index) => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
-                <button>戻す</button>
+                <button onClick={() => onClickBack(index)}>戻す</button>
               </div>
             );
           })}
