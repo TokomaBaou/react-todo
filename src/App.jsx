@@ -9,6 +9,7 @@ export const App = () => {
     "今日のタスク",
     "今日のタスク２"
   ]);
+  //ステートの変数名とステートを更新するための関数名
   const [completeTodos, setCompleteTodos] = useState(["今日のタスク３"]);
   //onChangeの関数
   const onChangeTodoText = (event) => setTodoText(event.target.value);
@@ -20,6 +21,14 @@ export const App = () => {
     // alert(todoText);
     setTodoText("");
   };
+
+  const onClickDelete = (index) => {
+    const newTodos = [...incompleteTodos];
+    //配列の０番目の要素からいくつ削除するか
+    newTodos.splice(index, 1);
+    setIncompleteTodos(newTodos);
+  };
+
   return (
     <>
       <div className="input-area">
@@ -33,12 +42,12 @@ export const App = () => {
       <div className="incomplete-area">
         <p className="title">未完了のTODO</p>
         <ul>
-          {incompleteTodos.map((todo) => {
+          {incompleteTodos.map((todo, index) => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
                 <button>完了</button>
-                <button>削除</button>
+                <button onClick={() => onClickDelete(index)}>削除</button>
               </div>
             );
           })}
