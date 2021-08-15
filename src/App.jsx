@@ -13,6 +13,7 @@ export const App = () => {
   const [completeTodos, setCompleteTodos] = useState([]);
   //onChangeの関数
   const onChangeTodoText = (event) => setTodoText(event.target.value);
+  //追加ボタン
   const onClickAdd = () => {
     if (todoText === "") return;
     //入力した値を未完了リストに追加する配列
@@ -21,7 +22,7 @@ export const App = () => {
     // alert(todoText);
     setTodoText("");
   };
-
+  //削除ボタン
   const onClickDelete = (index) => {
     const newTodos = [...incompleteTodos];
     //配列の０番目の要素からいくつ削除するか
@@ -29,6 +30,7 @@ export const App = () => {
     setIncompleteTodos(newTodos);
   };
 
+  //完了ボタン
   const onClickcomplete = (index) => {
     const newIncompleteTodos = [...incompleteTodos];
     //配列の０番目の要素からいくつ削除するか
@@ -38,11 +40,11 @@ export const App = () => {
     setIncompleteTodos(newIncompleteTodos);
     setCompleteTodos(newCompleteTodos);
   };
-
+  //戻すボタン
   const onClickBack = (index) => {
     const newCompleteTodos = [...completeTodos];
     newCompleteTodos.splice(index, 1);
-
+    //未完了TODOに戻す配列
     const newIncompleteTodos = [...incompleteTodos, completeTodos[index]];
     setCompleteTodos(newCompleteTodos);
     setIncompleteTodos(newIncompleteTodos);
