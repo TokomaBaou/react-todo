@@ -7,11 +7,13 @@ import { CompleteTodos } from "./Components/completeTodos";
 export const App = () => {
   //入力した値をState化する
   const [todoText, setTodoText] = useState("");
-  //未完了のTODOを格納する配列を作る
+
+  //1.未完了のTODOを格納する配列を作る
   const [incompleteTodos, setIncompleteTodos] = useState([]);
   //ステートの変数名とステートを更新するための関数名
   const [completeTodos, setCompleteTodos] = useState([]);
-  //onChangeの関数
+  //onChangeの関数 input変更の検知
+  //  useState("");　ここに渡したいから　　setTodoText（）；で囲う
   const onChangeTodoText = (event) => setTodoText(event.target.value);
   //追加ボタン
   const onClickAdd = () => {
